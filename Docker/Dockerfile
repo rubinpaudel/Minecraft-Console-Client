@@ -16,5 +16,6 @@ RUN chmod +x /opt/start-latest.sh
 RUN apt-get update && \ 
     apt-get install -y unzip && \
     mkdir /opt/data
+    
 
 ENTRYPOINT ["/bin/sh", "-c", "/opt/start-latest.sh"]
