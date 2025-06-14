@@ -10,7 +10,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0
 # `docker run -e MCC_PLATFORM=linux-arm64 -it localhost/minecraft-console-client`
 
 # Copy over the script and give it execution permissions
-COPY start-latest.sh /opt/start-latest.sh
+COPY /Docker/start-latest.sh /opt/start-latest.sh
 RUN chmod +x /opt/start-latest.sh
 
 RUN apt-get update && \ 
