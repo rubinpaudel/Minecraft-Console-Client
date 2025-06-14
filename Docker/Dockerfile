@@ -9,12 +9,13 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0
 # For example to use arm set the environment variable: MCC_PLATFORM=linux-arm64
 # `docker run -e MCC_PLATFORM=linux-arm64 -it localhost/minecraft-console-client`
 
-# Copy over the script and give it execution permissions
+# Copy over the scripts and give them execution permissions
 COPY /Docker/start-latest.sh /opt/start-latest.sh
-RUN chmod +x /opt/start-latest.sh
+COPY /Docker/generate-config.sh /opt/generate-config.sh
+RUN chmod +x /opt/start-latest.sh /opt/generate-config.sh
 
 RUN apt-get update && \ 
     apt-get install -y unzip && \
-    mkdir /opt/data
+    mkdir -p /opt/data
 
-ENTRYPOINT ["/bin/sh", "-c", "/opt/start-latest.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "/opt/generate-config.sh"]

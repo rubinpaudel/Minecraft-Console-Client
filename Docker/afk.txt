@@ -1,0 +1,3 @@
+send /join
+wait 60
+send /home afk
