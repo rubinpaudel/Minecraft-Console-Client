@@ -26,4 +26,6 @@ sed -i "s/REPLACE_SERVER_IP/${MINECRAFT_SERVER_IP}/g" /opt/data/MinecraftClient.
 exec /opt/start-latest.sh' > /opt/start.sh && \
 chmod +x /opt/start.sh
 
+cat /opt/data/MinecraftClient.ini
+
 ENTRYPOINT ["/bin/sh", "-c", "/opt/start.sh"]
