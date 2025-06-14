@@ -26,4 +26,4 @@ fi
 chmod +x ./MinecraftClient
 
 # Start the Client
-./MinecraftClient ${MINECRAFT_USERNAME} ${MINECRAFT_PASSWORD} ${MINECRAFT_SERVER_IP}
+./MinecraftClient ${MINECRAFT_USERNAME} ${MINECRAFT_PASSWORD} ${MINECRAFT_SERVER_IP} --minecraftversion=1.20.4
