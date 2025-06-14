@@ -9,23 +9,12 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0
 # For example to use arm set the environment variable: MCC_PLATFORM=linux-arm64
 # `docker run -e MCC_PLATFORM=linux-arm64 -it localhost/minecraft-console-client`
 
-# Copy over the scripts and give them execution permissions
+# Copy over the script and give it execution permissions
 COPY /Docker/start-latest.sh /opt/start-latest.sh
-COPY /Docker/MinecraftClient.ini /opt/data/MinecraftClient.ini
 RUN chmod +x /opt/start-latest.sh
 
 RUN apt-get update && \ 
     apt-get install -y unzip && \
-    mkdir -p /opt/data
+    mkdir /opt/data
 
-# Create a script to replace placeholders with environment variables
-RUN echo '#!/bin/sh\n\
-sed -i "s/REPLACE_USERNAME/${MINECRAFT_USERNAME}/g" /opt/data/MinecraftClient.ini\n\
-sed -i "s/REPLACE_PASSWORD/${MINECRAFT_PASSWORD}/g" /opt/data/MinecraftClient.ini\n\
-sed -i "s/REPLACE_SERVER_IP/${MINECRAFT_SERVER_IP}/g" /opt/data/MinecraftClient.ini\n\
-exec /opt/start-latest.sh' > /opt/start.sh && \
-chmod +x /opt/start.sh
-
-cat /opt/data/MinecraftClient.ini
-
-ENTRYPOINT ["/bin/sh", "-c", "/opt/start.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "/opt/start-latest.sh"]
